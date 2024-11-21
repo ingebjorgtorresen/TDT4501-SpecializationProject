@@ -1,0 +1,10 @@
+librosa                  # For music/audio analysis
+torch                    # PyTorch for model implementation
+transformers             # To use DALL-E and other pre-trained models
+soundfile                # For reading/writing sound files
+openai                   # For interfacing with DALL-E
+matplotlib                # For visualizing your results
+tidalapi
+spotipy
+pretty_midi
+python-dotenv
