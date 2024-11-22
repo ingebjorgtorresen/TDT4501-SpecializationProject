@@ -10,6 +10,8 @@ from spotify.track_info import get_track_info
 from utils.feature_to_descriptor import convert_features_to_descriptors
 from musicbert.analysis import analyze_music_with_musicbert
 from musicbert.midi_processing import load_midi_file
+from stable_diffusion.model_loader import load_stable_diffusion
+from stable_diffusion.generate_image import generate_image
 
 def main(title, artist, midi_path):
         # Step 1: Authenticate and retrieve Spotify features

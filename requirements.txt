@@ -8,3 +8,7 @@ tidalapi
 spotipy
 pretty_midi
 python-dotenv
+diffusers
+torchvision
+accelerate
+safetensors

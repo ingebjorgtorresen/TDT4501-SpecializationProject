@@ -1,0 +1,19 @@
+name: tdt4501
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - pytorch==2.0.1
+  - torchvision==0.15.2
+  - pip
+  - pip:
+      - pytorch-lightning
+      - omegaconf
+      - einops
+      - invisible-watermark
+      - safetensors
+      - diffusers
+      - transformers
+      - accelerate
