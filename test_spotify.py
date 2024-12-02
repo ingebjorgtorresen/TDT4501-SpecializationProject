@@ -1,38 +1,40 @@
-import os
-from dotenv import load_dotenv
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+"""from src.spotify.authentication import authenticate_spotify
+from src.spotify.track_info import get_track_info
 
-# Load environment variables
-load_dotenv()
-
-# Authenticate with Spotify
-def authenticate_spotify():
-    client_id = os.getenv("SPOTIFY_CLIENT_ID")
-    client_secret = os.getenv("SPOTIFY_CLIENT_SECRET")
-    auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-    return spotipy.Spotify(auth_manager=auth_manager)
-
-# Retrieve track metadata and audio features
+# Test Spotify Track Info
 def test_spotify_track_info(title, artist):
     sp = authenticate_spotify()
-    query = f"track:{title} artist:{artist}"
-    results = sp.search(q=query, type="track", limit=1)
-    if results['tracks']['items']:
-        track = results['tracks']['items'][0]
-        track_id = track['id']
-        audio_features = sp.audio_features(track_id)[0]
-        
-        # Print track details and audio features
-        print(f"Track Name: {track['name']}")
-        print(f"Artist: {track['artists'][0]['name']}")
-        print(f"Album: {track['album']['name']}")
-        print(f"Duration: {track['duration_ms']} ms")
-        print("Audio Features:", audio_features)
-    else:
-        print("Track not found on Spotify.")
+    track_info = get_track_info(sp, title, artist)
+    if track_info:
+        print("Track Details:")
+        print(f"- Name: {track_info['name']}")
+        print(f"- Artist: {track_info['artist']}")
+        print(f"- Album: {track_info['album']}")
+        print(f"- Duration: {track_info['duration']} ms")
+        print("\nAudio Features:")
+        for feature, value in track_info["features"].items():
+            print(f"- {feature}: {value}")
 
 # Run test with a sample song
 if __name__ == "__main__":
     # Replace these with a song and artist you want to test
     test_spotify_track_info("Blinding Lights", "The Weeknd")
+"""
+
+from src.spotify.track_info import fetch_audio_features
+
+def test_audio_features():
+    """
+    Test fetching audio features for a specific track.
+    """
+    track_id = "0VjIjW4GlUZAMYd2vXMi3b"  # Replace with a valid Spotify track ID
+    try:
+        features = fetch_audio_features(track_id)
+        print("Audio Features:")
+        for key, value in features.items():
+            print(f"- {key}: {value}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    test_audio_features()
