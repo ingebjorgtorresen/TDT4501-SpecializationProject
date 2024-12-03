@@ -1,10 +1,10 @@
 import requests
 from src.spotify.authentication import get_access_token  # Ensure this is imported
 
-def fetch_audio_features(track_id):
-    """
+"""def fetch_audio_features(track_id):
+    """"""
     Fetches audio features for a track using the Spotify API.
-    """
+    """"""
     access_token = get_access_token()
     headers = {"Authorization": f"Bearer {access_token}"}
     url = f"https://api.spotify.com/v1/audio-features/{track_id}"
@@ -13,7 +13,27 @@ def fetch_audio_features(track_id):
     if response.status_code == 200:
         return response.json()
     else:
+        raise Exception(f"Failed to fetch audio features: {response.status_code}, {response.json()}")"""
+
+def fetch_audio_features(track_id):
+    access_token = get_access_token()
+    headers = {"Authorization": f"Bearer {access_token}"}
+    url = f"https://api.spotify.com/v1/audio-features/{track_id}"
+
+    response = requests.get(url, headers=headers)
+
+    print("Request URL:", url)
+    print("Request Headers:", headers)
+    print("Response Status Code:", response.status_code)
+    print("Response JSON:", response.json())
+
+    if response.status_code == 200:
+        return response.json()
+    elif response.status_code == 403:
+        print("403 Forbidden: Possible causes include invalid access token or lack of permissions.")
+    else:
         raise Exception(f"Failed to fetch audio features: {response.status_code}, {response.json()}")
+
 
 
 def get_track_info(sp, title, artist):
